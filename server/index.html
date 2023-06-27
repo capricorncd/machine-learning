@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <h1>Home</h1>
+
+  <dl>
+    <dd><input type="text" /></dd>
+    <dd><button>Submit</button></dd>
+  </dl>
+
+  <script>
+    function $(s, parent = document) {
+      return parent.querySelector(s)
+    }
+
+    window.addEventListener('DOMContentLoaded', function () {
+      const input = $('input')
+      $('button').addEventListener('click', function () {
+        const value = input.value
+        if (!value) return
+        send(value.trim())
+        input.value = ''
+      })
+    })
+
+    function send(value) {
+      fetch('http://localhost:8000/v1/api', {
+        body: JSON.stringify({
+          question: value,
+          history: []
+        }),
+        method: 'POST',
+        headers: {
+          Accept: 'text/stream',
+          'Content-Type': 'application/json'
+        }
+      }).then(function (response) {
+        return response.json()
+      }).then(function (response) {
+        console.log(response)
+      }).catch(console.error)
+    }
+  </script>
+</body>
+
+</html>

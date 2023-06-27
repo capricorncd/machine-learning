@@ -15,6 +15,13 @@ https://www.anaconda.com/
 - Jupyter Notebook 
 - launch
 
+ 或者
+
+```bash
+# https://jupyter.org/install#jupyter-notebook
+jupyter notebook 
+```
+
 ### 快捷键
 
 - m 切换为 Markdown语法输入
